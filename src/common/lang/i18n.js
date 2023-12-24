@@ -10,9 +10,6 @@ i18n.use(initReactI18next).init({
 	},
 	lng: "ko",
 	debug: true,
-	interpolation: {
-		escapeValue: false,
-	},
 });
 
 export default i18n;

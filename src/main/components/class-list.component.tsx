@@ -105,9 +105,10 @@ export function ClassList() {
 									display: "flex",
 									flexWrap: "wrap",
 								}}>
-								{warriorClassCodeList.map((v) => {
+								{warriorClassCodeList.map((v, i) => {
 									return (
 										<ClassCard
+											key={i}
 											classCode={v}
 											classColor={eClassColor.WARRIOR}></ClassCard>
 									);
@@ -123,9 +124,10 @@ export function ClassList() {
 									display: "flex",
 									flexWrap: "wrap",
 								}}>
-								{magicianClassCodeList.map((v) => {
+								{magicianClassCodeList.map((v, i) => {
 									return (
 										<ClassCard
+											key={i}
 											classCode={v}
 											classColor={eClassColor.MAGICIAN}></ClassCard>
 									);
@@ -141,9 +143,10 @@ export function ClassList() {
 									display: "flex",
 									flexWrap: "wrap",
 								}}>
-								{archorClassCodeList.map((v) => {
+								{archorClassCodeList.map((v, i) => {
 									return (
 										<ClassCard
+											key={i}
 											classCode={v}
 											classColor={eClassColor.ARCHOR}></ClassCard>
 									);
@@ -159,9 +162,10 @@ export function ClassList() {
 									display: "flex",
 									flexWrap: "wrap",
 								}}>
-								{thiefClassCodeList.map((v) => {
+								{thiefClassCodeList.map((v, i) => {
 									return (
 										<ClassCard
+											key={i}
 											classCode={v}
 											classColor={eClassColor.THIEF}></ClassCard>
 									);
@@ -177,9 +181,10 @@ export function ClassList() {
 									display: "flex",
 									flexWrap: "wrap",
 								}}>
-								{pirateClassCodeList.map((v) => {
+								{pirateClassCodeList.map((v, i) => {
 									return (
 										<ClassCard
+											key={i}
 											classCode={v}
 											classColor={eClassColor.PIRATE}></ClassCard>
 									);
