@@ -45,7 +45,7 @@ export function ClassCard(props: {
 				<img
 					alt=""
 					key={classCode}
-					src={`/images/char${classCode}.png`}
+					src={`/images/characters/char${classCode}.png`}
 					style={{
 						width: "90px",
 						height: "90px",

@@ -32,7 +32,7 @@ export const CLASS_CODE_MAP = {
 	카인: eCharacterClass.KAIN,
 	나이트로드: eCharacterClass.NIGHT_LORD,
 	섀도어: eCharacterClass.THIEF_MASTER,
-	"듀얼 블레이드": eCharacterClass.DUAL_BLADE,
+	듀얼블레이더: eCharacterClass.DUAL_BLADE,
 	나이트워커: eCharacterClass.NIGHT_WALKER,
 	제논: eCharacterClass.XENON_PIRATE,
 	팬텀: eCharacterClass.PANTOM,

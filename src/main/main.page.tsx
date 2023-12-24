@@ -2,8 +2,10 @@ import styled from "styled-components";
 import { SearchBar } from "../common/components/search-bar.component";
 import { ClassList } from "./components/class-list.component";
 import { Top3Character } from "./components/top3-character.component";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
-const MainContainer = styled.div`
+const MainContainer = styled.form`
 	display: flex;
 	flex-flow: column;
 	align-items: center;
@@ -23,10 +25,24 @@ const Title = styled.div`
 `;
 
 export function MainPage() {
+	const form = useForm({
+		defaultValues: {
+			searchKeyword: "",
+		},
+	});
+	const navigate = useNavigate();
+
+	const handleSubmit = () => {
+		navigate(`/info/${form.getValues().searchKeyword}`);
+	};
+
 	return (
 		<MainContainer>
 			<Title>maple info</Title>
-			<SearchBar></SearchBar>
+			<SearchBar
+				form={form}
+				name="searchKeyword"
+				onSubmit={handleSubmit}></SearchBar>
 			<Top3Character></Top3Character>
 			<ClassList></ClassList>
 		</MainContainer>

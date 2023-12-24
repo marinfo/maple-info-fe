@@ -2,10 +2,8 @@ import { CLASS_CODE_MAP } from "../constants/class-code-map.constant";
 import { eCharacterClass } from "../enums/character-class.enum";
 
 class Utils {
-	static classNameToCode(
-		className: keyof typeof CLASS_CODE_MAP
-	): eCharacterClass {
-		return CLASS_CODE_MAP[className];
+	static classNameToCode(className: string): eCharacterClass {
+		return CLASS_CODE_MAP[className as keyof typeof CLASS_CODE_MAP];
 	}
 
 	static formatNumberToKorean(num: number): string {
