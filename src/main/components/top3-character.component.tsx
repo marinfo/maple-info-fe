@@ -1,10 +1,15 @@
 import { styled } from "styled-components";
 import { CharacterCard } from "./character-card.component";
-import { eCharacterClass } from "../../common/enums/character-class.enum";
+import {
+	getCharacterInfo,
+	getTop3CharacterInfo,
+} from "../../common/apis/character.api";
+import { useQuery } from "react-query";
 
 const CharacterCardList = styled.div`
 	display: flex;
 	flex-direction: row;
+	position: relative;
 	justify-content: space-between;
 	border-radius: 5px;
 	margin: 20px;
@@ -12,45 +17,46 @@ const CharacterCardList = styled.div`
 	height: 250px;
 `;
 
+const Top3Label = styled.span`
+	position: absolute;
+	font-size: 12px;
+	font-weight: bold;
+	color: #bababa;
+	top: -20px;
+`;
+
 export function Top3Character() {
-	const mockTop1Character = {
-		nickName: "쪼빼미",
-		level: 292,
-		classCode: eCharacterClass.WIND_BREAKER,
-		power: 720849372,
-	};
-	const mockTop2Character = {
-		nickName: "쏴두마스터",
-		level: 274,
-		classCode: eCharacterClass.SOUL_MASTER,
-		power: 680213276,
-	};
-	const mockTop3Character = {
-		nickName: "케티써",
-		level: 282,
-		classCode: eCharacterClass.VIPER,
-		power: 650329415,
-	};
+	const { data: top3Info, isFetched: isTop3InfoFetched } = useQuery({
+		queryFn: getTop3CharacterInfo,
+		queryKey: ["getTop3CharacterInfo"],
+		select: (res) => {
+			if (res.success) {
+				return res.data.rankUsers;
+			} else if (!res.success) {
+				console.log("TOP3 데이터 가져오기 실패");
+				return [];
+			}
+		},
+	});
+
+	console.log(top3Info);
+
 	return (
 		<CharacterCardList>
-			<CharacterCard
-				cardColor="#5CB85C"
-				title="TOP 1"
-				server="베라"
-				characterInfo={mockTop1Character}
-			/>
-			<CharacterCard
-				cardColor="#5393CA"
-				title="TOP 2"
-				server="스카니아"
-				characterInfo={mockTop2Character}
-			/>
-			<CharacterCard
-				cardColor="#6D62A1"
-				title="TOP 3"
-				server="엘리시움"
-				characterInfo={mockTop3Character}
-			/>
+			<Top3Label>전체 서버 전투력 TOP3</Top3Label>
+			{isTop3InfoFetched &&
+				top3Info.map((info: any, idx: number) => {
+					return (
+						<CharacterCard
+							key={idx}
+							cardColor="#5CB85C"
+							title={`TOP ${idx + 1}`}
+							characterInfo={top3Info.find(
+								(info: any) => info.rank === idx + 1
+							)}
+						/>
+					);
+				})}
 		</CharacterCardList>
 	);
 }

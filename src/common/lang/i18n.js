@@ -9,7 +9,6 @@ i18n.use(initReactI18next).init({
 		},
 	},
 	lng: "ko",
-	debug: true,
 });
 
 export default i18n;

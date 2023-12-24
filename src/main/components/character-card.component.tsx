@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import { eCharacterClass } from "../../common/enums/character-class.enum";
 import { useTranslation } from "react-i18next";
 import Utils from "../../common/utils/utils";
+import { useNavigate } from "react-router-dom";
 
 const Card = styled.div`
 	display: flex;
@@ -15,13 +16,14 @@ const Card = styled.div`
 	height: 250px;
 `;
 
-const DetailButton = styled.div`
+const DetailButton = styled.button`
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	width: 220px;
 	height: 45px;
 	color: white;
+	border: 0px;
 	font-weight: bold;
 `;
 
@@ -54,7 +56,6 @@ const CharacterInfo = styled.div`
 const CharacterImage = styled.img`
 	width: 96px;
 	height: 96px;
-	margin: 10px;
 `;
 
 const PowerInfo = styled.span`
@@ -62,28 +63,43 @@ const PowerInfo = styled.span`
 	font-weight: bold;
 	line-height: 13px;
 	color: rgb(132, 137, 153);
-	font-family: Pretendard, -apple-system, Segoe UI, Roboto, Helvetica Neue,
-		sans-serif;
+`;
+
+const GuildInfo = styled.div`
+	font-size: 13px;
+	line-height: 13px;
+	color: rgb(132, 137, 153);
 `;
 
 type characterInfo = {
-	nickName: string;
-	level: number;
-	classCode: eCharacterClass;
-	power: number;
+	characterClass: string;
+	characterGuildName: string;
+	characterImage: string;
+	characterLevel: number;
+	characterName: string;
+	combatPower: number;
+	guildMark?: string;
+	guildMarkCustom?: string;
+	rank: number;
+	worldName: string;
 };
 
 interface iCharacterCardProps {
-	image?: string;
 	cardColor?: string;
 	title: string;
-	server: string;
 	characterInfo: characterInfo;
 }
 
 export function CharacterCard(props: iCharacterCardProps) {
-	const { cardColor, title, server, characterInfo } = props;
+	const { cardColor, title, characterInfo } = props;
+	const navigation = useNavigate();
 	const { t } = useTranslation();
+
+	// base64 decode
+	// characterInfo.guildMark = atob(characterInfo.guildMark);
+
+	// TODO. 길드 마크 복호화 안돼서 일단 제거, base64 디코딩 맞는지 확인 필요
+	delete characterInfo.guildMark;
 
 	return (
 		<Card
@@ -100,7 +116,8 @@ export function CharacterCard(props: iCharacterCardProps) {
 			<ContentBox>
 				<CharacterInfo>
 					<img
-						src={`/images/${server}.png`}
+						alt={""}
+						src={`/images/servers/${characterInfo.worldName}.png`}
 						style={{
 							width: "19px",
 							height: "19px",
@@ -108,26 +125,45 @@ export function CharacterCard(props: iCharacterCardProps) {
 						}}
 					/>
 					<span style={{ fontWeight: 600, marginRight: "3px" }}>
-						{characterInfo.nickName}
+						{characterInfo.characterName}
 					</span>
 					<span style={{ marginRight: "3px" }}>
-						{"Lv." + characterInfo.level}
+						{"Lv." + characterInfo.characterLevel}
 					</span>
 					<span style={{ color: "#848999" }}>
-						{t(`CLASS_NAME.${eCharacterClass[characterInfo.classCode]}`)}
+						{t(
+							`CLASS_NAME.${
+								eCharacterClass[
+									Utils.classNameToCode(characterInfo.characterClass)
+								]
+							}`
+						)}
 					</span>
 				</CharacterInfo>
-				<CharacterImage src={`/images/char${characterInfo.classCode}.png`} />
+				<CharacterImage src={characterInfo.characterImage} />
 				<PowerInfo>
-					{"전투력 " + Utils.formatNumberToKorean(characterInfo.power)}
+					{"전투력 " + Utils.formatNumberToKorean(characterInfo.combatPower)}
 				</PowerInfo>
+				<GuildInfo>
+					{"길드 " +
+						(characterInfo.characterGuildName ? (
+							<>
+								{characterInfo.guildMark && (
+									<img src={atob(characterInfo.guildMark)}></img>
+								)}
+								<span>{characterInfo.characterGuildName}</span>
+							</>
+						) : (
+							"없음"
+						))}
+				</GuildInfo>
 			</ContentBox>
 			<DetailButton
 				style={{
 					backgroundColor: cardColor,
 				}}
 				onClick={() => {
-					console.log("상세 정보 페이지 이동");
+					navigation(`/info/${characterInfo.characterName}`);
 				}}>
 				<div>상세 정보</div>
 			</DetailButton>

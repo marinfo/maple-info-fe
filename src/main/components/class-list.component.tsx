@@ -1,11 +1,6 @@
 import { styled } from "styled-components";
 import { BaseTab } from "../../common/components/tab.component";
-import { useTranslation } from "react-i18next";
-import {
-	eCharacterClass,
-	eClassColor,
-} from "../../common/enums/character-class.enum";
-import { CharacterCard } from "./character-card.component";
+import { eClassColor } from "../../common/enums/character-class.enum";
 import { ClassCard } from "./class-card.component";
 
 const Container = styled.div`
@@ -26,30 +21,7 @@ const BoxLabel = styled.div`
 	top: -20px;
 `;
 
-const ClassButton = styled.div`
-	display: flex;
-	justify-content: center;
-	padding: "0px 10px 10px 10px";
-	position: relative;
-	width: 100px;
-	height: 120px;
-`;
-
-const ClassLabel = styled.div`
-	position: absolute;
-	font-size: 12px;
-	font-weight: bold;
-	text-align: center;
-	width: 100%;
-	border-bottom-left-radius: 5px;
-	border-bottom-right-radius: 5px;
-	color: #ffffff;
-	top: calc(100% - 20px);
-`;
-
 export function ClassList() {
-	const { t } = useTranslation();
-
 	const warriorClassCodeList = Array(12)
 		.fill(1)
 		.map((v, i) => {
