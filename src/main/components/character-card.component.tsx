@@ -117,8 +117,6 @@ export function CharacterCard(props: iCharacterCardProps) {
 	const navigation = useNavigate();
 	const { t } = useTranslation();
 
-	console.log(characterInfo.guildMark);
-
 	return (
 		<Card
 			style={{

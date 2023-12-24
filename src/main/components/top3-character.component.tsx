@@ -39,8 +39,6 @@ export function Top3Character() {
 		},
 	});
 
-	console.log(top3Info);
-
 	return (
 		<CharacterCardList>
 			<Top3Label>전체 서버 전투력 TOP3</Top3Label>
