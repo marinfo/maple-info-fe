@@ -56,19 +56,41 @@ const CharacterInfo = styled.div`
 const CharacterImage = styled.img`
 	width: 96px;
 	height: 96px;
+	margin: 5px;
 `;
 
 const PowerInfo = styled.span`
 	font-size: 13px;
 	font-weight: bold;
+	margin-bottom: 5px;
 	line-height: 13px;
 	color: rgb(132, 137, 153);
 `;
 
 const GuildInfo = styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+`;
+
+const GuildLabel = styled.span`
 	font-size: 13px;
 	line-height: 13px;
+	margin-right: 5px;
 	color: rgb(132, 137, 153);
+`;
+
+const GuildName = styled.span`
+	font-size: 13px;
+	line-height: 13px;
+	font-weight: bold;
+	margin-right: 5px;
+	color: #848999;
+`;
+
+const GuildMarkImage = styled.img`
+	margin: 3px;
 `;
 
 type characterInfo = {
@@ -78,7 +100,7 @@ type characterInfo = {
 	characterLevel: number;
 	characterName: string;
 	combatPower: number;
-	guildMark?: string;
+	guildMark: string;
 	guildMarkCustom?: string;
 	rank: number;
 	worldName: string;
@@ -95,11 +117,7 @@ export function CharacterCard(props: iCharacterCardProps) {
 	const navigation = useNavigate();
 	const { t } = useTranslation();
 
-	// base64 decode
-	// characterInfo.guildMark = atob(characterInfo.guildMark);
-
-	// TODO. 길드 마크 복호화 안돼서 일단 제거, base64 디코딩 맞는지 확인 필요
-	delete characterInfo.guildMark;
+	console.log(characterInfo.guildMark);
 
 	return (
 		<Card
@@ -145,17 +163,17 @@ export function CharacterCard(props: iCharacterCardProps) {
 					{"전투력 " + Utils.formatNumberToKorean(characterInfo.combatPower)}
 				</PowerInfo>
 				<GuildInfo>
-					{"길드 " +
-						(characterInfo.characterGuildName ? (
-							<>
-								{characterInfo.guildMark && (
-									<img src={atob(characterInfo.guildMark)}></img>
-								)}
-								<span>{characterInfo.characterGuildName}</span>
-							</>
-						) : (
-							"없음"
-						))}
+					<GuildLabel>{"길드 "}</GuildLabel>
+					<GuildMarkImage
+						src={`data:image/png;base64,${characterInfo.guildMarkCustom}`}
+						style={{
+							marginRight: "3px",
+						}}></GuildMarkImage>
+					<GuildName>
+						{characterInfo.characterGuildName
+							? characterInfo.characterGuildName
+							: "없음"}
+					</GuildName>
 				</GuildInfo>
 			</ContentBox>
 			<DetailButton

@@ -14,6 +14,14 @@ export function InfoPage() {
 	const { data: characterInfo, isFetched: isInfoFetched } = useQuery({
 		queryFn: () => getCharacterInfo(characterName),
 		queryKey: ["getCharacterInfo"],
+		select: (res) => {
+			if (res.success) {
+				return res.data;
+			} else if (!res.success) {
+				console.log("캐릭 정보 가져오기 실패");
+				return {};
+			}
+		},
 	});
 
 	return isInfoFetched ? (
@@ -25,7 +33,7 @@ export function InfoPage() {
 				}}>
 				{characterInfo.characterName}
 			</span>
-			<img alt={""} src={characterInfo.characterImage}></img>
+			<img alt="" src={characterInfo.characterImage}></img>
 		</>
 	) : null;
 }
