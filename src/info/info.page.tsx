@@ -1,6 +1,33 @@
 import { useQuery } from "react-query";
 import { useLocation } from "react-router-dom";
 import { getCharacterInfo } from "../common/apis/character.api";
+import { styled } from "styled-components";
+import { CharacterProfile } from "./components/character-profile.component";
+import { CharacterStat } from "./components/character-stat.component";
+import { CharacterSpec } from "./components/character-spec.component";
+import { iCharacterInfo } from "../main/components/character-card.component";
+
+const Title = styled.div`
+	color: white;
+	font-size: 30px;
+	display: flex;
+	font-weight: 700;
+	font-family: revert;
+	margin-bottom: 15px;
+`;
+
+const Wrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	padding: 15px 40px 15px 40px;
+	color: #e9eaed;
+`;
+
+const DetailInfoContainer = styled.div`
+	display: flex;
+	flex-direction: Row;
+	height: calc(100vh - 250px);
+`;
 
 export function InfoPage() {
 	const location = useLocation()
@@ -18,7 +45,7 @@ export function InfoPage() {
 			if (res.success) {
 				return res.data;
 			} else if (!res.success) {
-				console.log("캐릭 정보 가져오기 실패");
+				console.log("캐릭터 정보 가져오기 실패");
 				return {};
 			}
 		},
@@ -26,14 +53,14 @@ export function InfoPage() {
 
 	return isInfoFetched ? (
 		<>
-			<span
-				style={{
-					fontSize: "20px",
-					color: "white",
-				}}>
-				{characterInfo.characterName}
-			</span>
-			<img alt="" src={characterInfo.characterImage}></img>
+			<Wrapper>
+				<Title>maple info</Title>
+				<CharacterProfile characterInfo={characterInfo}></CharacterProfile>
+				<DetailInfoContainer>
+					<CharacterStat></CharacterStat>
+					<CharacterSpec></CharacterSpec>
+				</DetailInfoContainer>
+			</Wrapper>
 		</>
 	) : null;
 }

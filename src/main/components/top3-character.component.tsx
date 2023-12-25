@@ -1,10 +1,8 @@
 import { styled } from "styled-components";
 import { CharacterCard } from "./character-card.component";
-import {
-	getCharacterInfo,
-	getTop3CharacterInfo,
-} from "../../common/apis/character.api";
+import { getTop3CharacterInfo } from "../../common/apis/character.api";
 import { useQuery } from "react-query";
+import Utils from "../../common/utils/utils";
 
 const CharacterCardList = styled.div`
 	display: flex;
@@ -47,7 +45,7 @@ export function Top3Character() {
 					return (
 						<CharacterCard
 							key={idx}
-							cardColor="#5CB85C"
+							cardColor={Utils.classToColor(info.characterClass)}
 							title={`TOP ${idx + 1}`}
 							characterInfo={top3Info.find(
 								(info: any) => info.rank === idx + 1
