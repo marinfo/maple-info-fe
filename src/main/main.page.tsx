@@ -37,7 +37,7 @@ export function MainPage() {
 	};
 
 	return (
-		<MainContainer>
+		<MainContainer onSubmit={handleSubmit}>
 			<Title>maple info</Title>
 			<SearchBar
 				form={form}

@@ -48,3 +48,63 @@ export const CLASS_CODE_MAP = {
 	"엔젤릭 버스터": eCharacterClass.ANGELIC_BUSTER,
 	아크: eCharacterClass.ARK,
 };
+
+export const WARRIOR_CLASS_CODES = [
+	eCharacterClass.HERO,
+	eCharacterClass.PALADIN,
+	eCharacterClass.DARK_KNIGHT,
+	eCharacterClass.SOUL_MASTER,
+	eCharacterClass.MIHAEL,
+	eCharacterClass.BLASTER,
+	eCharacterClass.DAEMON_SLAYER,
+	eCharacterClass.DAEMON_AVENGER,
+	eCharacterClass.ARAN,
+	eCharacterClass.KAISER,
+	eCharacterClass.ADELE,
+	eCharacterClass.ZERO,
+];
+
+export const MAGICIAN_CLASS_CODES = [
+	eCharacterClass.ARCHMAGE_FP,
+	eCharacterClass.ARCHMAGE_TC,
+	eCharacterClass.BISHOP,
+	eCharacterClass.FLAME_WIZARD,
+	eCharacterClass.BATTLE_MAGE,
+	eCharacterClass.EVAN,
+	eCharacterClass.LUMINOUS,
+	eCharacterClass.ILLIUM,
+	eCharacterClass.LARA,
+];
+
+export const ARCHOR_CLASS_CODES = [
+	eCharacterClass.BOW_MASTER,
+	eCharacterClass.ARCHERY_MASTER,
+	eCharacterClass.PATH_FINDER,
+	eCharacterClass.WIND_BREAKER,
+	eCharacterClass.WILD_HUNTER,
+	eCharacterClass.MERCEDES,
+	eCharacterClass.KAIN,
+];
+
+export const THIEF_CLASS_CODES = [
+	eCharacterClass.NIGHT_LORD,
+	eCharacterClass.THIEF_MASTER,
+	eCharacterClass.DUAL_BLADE,
+	eCharacterClass.NIGHT_WALKER,
+	eCharacterClass.XENON_PIRATE,
+	eCharacterClass.PANTOM,
+	eCharacterClass.KADENA,
+	eCharacterClass.KALI,
+	eCharacterClass.HOYOUNG,
+];
+
+export const PIRATE_CLASS_CODES = [
+	eCharacterClass.VIPER,
+	eCharacterClass.CAPTAIN,
+	eCharacterClass.CANON_SHOOTER,
+	eCharacterClass.STRIKER,
+	eCharacterClass.MECHANIC,
+	eCharacterClass.EUNWAL,
+	eCharacterClass.ANGELIC_BUSTER,
+	eCharacterClass.ARK,
+];

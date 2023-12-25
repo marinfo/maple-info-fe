@@ -93,7 +93,7 @@ const GuildMarkImage = styled.img`
 	margin: 3px;
 `;
 
-type characterInfo = {
+export interface iCharacterInfo {
 	characterClass: string;
 	characterGuildName: string;
 	characterImage: string;
@@ -104,17 +104,17 @@ type characterInfo = {
 	guildMarkCustom?: string;
 	rank: number;
 	worldName: string;
-};
+}
 
 interface iCharacterCardProps {
 	cardColor?: string;
 	title: string;
-	characterInfo: characterInfo;
+	characterInfo: iCharacterInfo;
 }
 
 export function CharacterCard(props: iCharacterCardProps) {
 	const { cardColor, title, characterInfo } = props;
-	const navigation = useNavigate();
+	const navigate = useNavigate();
 	const { t } = useTranslation();
 
 	return (
@@ -175,13 +175,14 @@ export function CharacterCard(props: iCharacterCardProps) {
 				</GuildInfo>
 			</ContentBox>
 			<DetailButton
+				type="button"
 				style={{
 					backgroundColor: cardColor,
 				}}
 				onClick={() => {
-					navigation(`/info/${characterInfo.characterName}`);
+					navigate(`/info/${characterInfo.characterName}`);
 				}}>
-				<div>상세 정보</div>
+				상세 정보
 			</DetailButton>
 		</Card>
 	);
