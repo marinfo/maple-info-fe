@@ -5,8 +5,8 @@ import { Union } from "./tab-panels/union.component";
 import { VMatrix } from "./tab-panels/vmatrix.component";
 
 const SpecBox = styled.div`
-	flex: 7;
-	height: 100%;
+	flex: 8;
+	height: calc(100vh - 240px);
 	background-color: white;
 	border-radius: 5px;
 `;

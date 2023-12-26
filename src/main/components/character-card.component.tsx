@@ -147,13 +147,7 @@ export function CharacterCard(props: iCharacterCardProps) {
 						{"Lv." + characterInfo.characterLevel}
 					</span>
 					<span style={{ color: "#848999" }}>
-						{t(
-							`CLASS_NAME.${
-								eCharacterClass[
-									Utils.classNameToCode(characterInfo.characterClass)
-								]
-							}`
-						)}
+						{characterInfo.characterClass}
 					</span>
 				</CharacterInfo>
 				<CharacterImage src={characterInfo.characterImage} />

@@ -5,7 +5,6 @@ import { styled } from "styled-components";
 import { CharacterProfile } from "./components/character-profile.component";
 import { CharacterStat } from "./components/character-stat.component";
 import { CharacterSpec } from "./components/character-spec.component";
-import { iCharacterInfo } from "../main/components/character-card.component";
 
 const Title = styled.div`
 	color: white;
@@ -20,7 +19,7 @@ const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	padding: 15px 40px 15px 40px;
-	color: #e9eaed;
+	color: #e0e0e0;
 `;
 
 const DetailInfoContainer = styled.div`
@@ -30,16 +29,12 @@ const DetailInfoContainer = styled.div`
 `;
 
 export function InfoPage() {
-	const location = useLocation()
-		.pathname.split("/")
-		.filter((v) => v !== "/");
-
-	const characterName = decodeURIComponent(
-		location[location.indexOf("info") + 1]
-	);
+	const location = useLocation();
+	const params = new URLSearchParams(location.search);
+	const id = params.get("id") as string;
 
 	const { data: characterInfo, isFetched: isInfoFetched } = useQuery({
-		queryFn: () => getCharacterInfo(characterName),
+		queryFn: () => getCharacterInfo(id),
 		queryKey: ["getCharacterInfo"],
 		select: (res) => {
 			if (res.success) {
@@ -57,7 +52,7 @@ export function InfoPage() {
 				<Title>maple info</Title>
 				<CharacterProfile characterInfo={characterInfo}></CharacterProfile>
 				<DetailInfoContainer>
-					<CharacterStat></CharacterStat>
+					<CharacterStat characterInfo={characterInfo}></CharacterStat>
 					<CharacterSpec></CharacterSpec>
 				</DetailInfoContainer>
 			</Wrapper>

@@ -1,18 +1,13 @@
 import {
-	ARCHOR_CLASS_CODES,
-	CLASS_CODE_MAP,
-	MAGICIAN_CLASS_CODES,
-	PIRATE_CLASS_CODES,
-	THIEF_CLASS_CODES,
-	WARRIOR_CLASS_CODES,
-} from "../constants/class-code-map.constant";
+	ARCHOR_CLASSES,
+	MAGICIAN_CLASSES,
+	PIRATE_CLASSES,
+	THIEF_CLASSES,
+	WARRIOR_CLASSES,
+} from "../constants/class-map.constant";
 import { eCharacterClass, eClassColor } from "../enums/character-class.enum";
 
 class Utils {
-	static classNameToCode(className: string): eCharacterClass {
-		return CLASS_CODE_MAP[className as keyof typeof CLASS_CODE_MAP];
-	}
-
 	static formatNumberToKorean(num: number): string {
 		const units = ["", "만", "억", "조", "경", "해"];
 		const numString = num.toString();
@@ -36,22 +31,19 @@ class Utils {
 	}
 
 	static classToColor(className: string) {
-		// 전사 0~12, 마법사 13~22, 궁수 23~29, 도적 30~38, 해적 39~47
-		const classCode = this.classNameToCode(className);
-
-		if (WARRIOR_CLASS_CODES.some((code) => code === classCode)) {
+		if (WARRIOR_CLASSES.some((name) => name === className)) {
 			return eClassColor.WARRIOR;
 		}
-		if (MAGICIAN_CLASS_CODES.some((code) => code === classCode)) {
+		if (MAGICIAN_CLASSES.some((name) => name === className)) {
 			return eClassColor.MAGICIAN;
 		}
-		if (ARCHOR_CLASS_CODES.some((code) => code === classCode)) {
+		if (ARCHOR_CLASSES.some((name) => name === className)) {
 			return eClassColor.ARCHOR;
 		}
-		if (THIEF_CLASS_CODES.some((code) => code === classCode)) {
+		if (THIEF_CLASSES.some((name) => name === className)) {
 			return eClassColor.THIEF;
 		}
-		if (PIRATE_CLASS_CODES.some((code) => code === classCode)) {
+		if (PIRATE_CLASSES.some((name) => name === className)) {
 			return eClassColor.PIRATE;
 		}
 	}
