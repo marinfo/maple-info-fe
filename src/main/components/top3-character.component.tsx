@@ -31,7 +31,7 @@ export function Top3Character() {
 			if (res.success) {
 				return res.data.rankUsers;
 			} else if (!res.success) {
-				console.log("TOP3 데이터 가져오기 실패");
+				console.log("TOP3 데이터 조회에 실패했습니다.");
 				return [];
 			}
 		},

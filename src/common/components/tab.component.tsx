@@ -13,6 +13,7 @@ type panel = {
 };
 
 const TabStyle = styled.div`
+	height: 100%;
 	.MuiTabPanel-root {
 		padding: 0px;
 	}
@@ -38,7 +39,10 @@ export function BaseTab(props: iTabProps) {
 				</Box>
 				{children.map((v, i) => {
 					return (
-						<TabPanel key={i} value={String(i + 1)}>
+						<TabPanel
+							key={i}
+							value={String(i + 1)}
+							style={{ padding: "10px", overflow: "scroll" }}>
 							{v.panel}
 						</TabPanel>
 					);

@@ -43,7 +43,6 @@ export function SearchBar(props: iSearchBarProps) {
 				fullWidth={true}></TextField>
 			<Button
 				onClick={() => {
-					console.log("searchBar Submit");
 					onSubmit && onSubmit();
 				}}>
 				<Search

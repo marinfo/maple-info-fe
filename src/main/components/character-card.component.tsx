@@ -1,6 +1,4 @@
 import { styled } from "styled-components";
-import { eCharacterClass } from "../../common/enums/character-class.enum";
-import { useTranslation } from "react-i18next";
 import Utils from "../../common/utils/utils";
 import { useNavigate } from "react-router-dom";
 
@@ -115,7 +113,6 @@ interface iCharacterCardProps {
 export function CharacterCard(props: iCharacterCardProps) {
 	const { cardColor, title, characterInfo } = props;
 	const navigate = useNavigate();
-	const { t } = useTranslation();
 
 	return (
 		<Card
@@ -174,7 +171,7 @@ export function CharacterCard(props: iCharacterCardProps) {
 					backgroundColor: cardColor,
 				}}
 				onClick={() => {
-					navigate(`/info/${characterInfo.characterName}`);
+					navigate(`/info?id=${characterInfo.characterName}`);
 				}}>
 				상세 정보
 			</DetailButton>

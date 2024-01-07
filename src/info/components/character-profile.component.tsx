@@ -6,14 +6,16 @@ import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { useQuery } from "react-query";
 import { getGuildInfo } from "../../common/apis/guild.api";
+import { Font12Px, Font14Px, Logo } from "../../common/styles/global-component";
 
 const ProfileBox = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	flex: 1;
-	min-height: 240px;
-	max-height: 240px;
+	min-height: 220px;
+	max-height: 220px;
+	min-width: 880px;
 	background-color: rgba(255, 255, 255, 0.2);
 	border-radius: 5px;
 	margin-bottom: 10px;
@@ -24,22 +26,6 @@ const SquareImage = styled.img`
 	width: 144px;
 	height: 144px;
 	margin: 15px 30px 15px 30px;
-`;
-
-const Logo = styled.img`
-	width: 16px;
-	height: 16px;
-	margin-right: 5px;
-`;
-
-export const Font12Px = styled.span`
-	font-size: 12px;
-`;
-
-export const Font14Px = styled.span`
-	font-size: 14px;
-	font-weight: bold;
-	margin-bottom: 10px;
 `;
 
 const Description = styled.div`
@@ -107,8 +93,11 @@ export function CharacterProfile(props: { characterInfo: iCharacterInfo }) {
 		queryKey: ["getGuildName"],
 		select: (res) => {
 			if (res.success) {
-				console.log(res.data);
-				return res.data;
+				const info = res.data;
+				if (info.guildMarkCustom) {
+					info.guildMark = info.guildMarkCustom;
+				}
+				return info;
 			} else if (!res.success) {
 				console.log("길드 정보 조회에 실패했습니다.");
 				return {};
@@ -127,6 +116,13 @@ export function CharacterProfile(props: { characterInfo: iCharacterInfo }) {
 					<Font12Px>마지막 접속일: 1일 전</Font12Px>
 				</Col>
 				<Description>
+					{isGuildFetched && guildInfo.guildName && (
+						<Row>
+							<Logo
+								src={`data:image/png;base64,${guildInfo.guildMarkCustom}`}></Logo>
+							<Font12Px>{guildInfo.guildName}</Font12Px>
+						</Row>
+					)}
 					<Row>
 						<CharacterName>{characterName}</CharacterName>
 						<div
@@ -136,11 +132,11 @@ export function CharacterProfile(props: { characterInfo: iCharacterInfo }) {
 								display: "flex",
 								alignItems: "center",
 								padding: "3px 5px 3px 5px",
+								marginRight: "5px",
 							}}>
 							<Logo src={`/images/servers/${worldName}.png`}></Logo>
 							<Font12Px>{worldName}</Font12Px>
 						</div>
-						{isGuildFetched ? <Logo></Logo> : null}
 					</Row>
 					<Row style={{ marginBottom: "10px" }}>
 						<Font12Px>

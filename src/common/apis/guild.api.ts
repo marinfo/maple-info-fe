@@ -6,7 +6,7 @@ export async function getGuildInfo(
 	worldName: string
 ): Promise<any> {
 	return await baseApi({
-		url: `http://localhost:8080/guild/basic?guildName=${guildName}&worldName=${worldName}`,
+		url: `http://localhost:8080/nexon/guild/basic?guildName=${guildName}&worldName=${worldName}`,
 		method: eApiMethod.GET,
 	});
 }

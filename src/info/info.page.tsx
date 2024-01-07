@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getCharacterInfo } from "../common/apis/character.api";
 import { styled } from "styled-components";
 import { CharacterProfile } from "./components/character-profile.component";
@@ -19,7 +19,8 @@ const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	padding: 15px 40px 15px 40px;
-	color: #e0e0e0;
+	width: calc(100% - 80px);
+	color: #e9eaed;
 `;
 
 const DetailInfoContainer = styled.div`
@@ -30,6 +31,7 @@ const DetailInfoContainer = styled.div`
 
 export function InfoPage() {
 	const location = useLocation();
+	const navigate = useNavigate();
 	const params = new URLSearchParams(location.search);
 	const id = params.get("id") as string;
 
@@ -40,7 +42,7 @@ export function InfoPage() {
 			if (res.success) {
 				return res.data;
 			} else if (!res.success) {
-				console.log("캐릭터 정보 가져오기 실패");
+				console.log("캐릭터 정보 조회에 실패했습니다.");
 				return {};
 			}
 		},
@@ -49,11 +51,17 @@ export function InfoPage() {
 	return isInfoFetched ? (
 		<>
 			<Wrapper>
-				<Title>maple info</Title>
+				<Title
+					onClick={() => {
+						navigate("/");
+					}}>
+					maple info
+				</Title>
 				<CharacterProfile characterInfo={characterInfo}></CharacterProfile>
 				<DetailInfoContainer>
 					<CharacterStat characterInfo={characterInfo}></CharacterStat>
-					<CharacterSpec></CharacterSpec>
+					<CharacterSpec
+						characterName={characterInfo.characterName}></CharacterSpec>
 				</DetailInfoContainer>
 			</Wrapper>
 		</>

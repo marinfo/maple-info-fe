@@ -1,13 +1,16 @@
 import { styled } from "styled-components";
 import { iCharacterInfo } from "../../main/components/character-card.component";
-import { Font12Px, Font14Px } from "./character-profile.component";
+import { Font12Px, Font14Px } from "../../common/styles/global-component";
 
 const StatBox = styled.div`
 	flex: 3;
 	background-color: rgba(255, 255, 255, 0.2);
-	height: calc(100vh - 260px);
+	height: 550px;
+	max-width: 250px;
+	min-width: 250px;
 	display: flex;
 	flex-direction: column;
+	overflow: scroll;
 	padding: 10px;
 	border-radius: 5px;
 	margin-right: 10px;
@@ -66,8 +69,6 @@ export function CharacterStat(props: { characterInfo: iCharacterInfo }) {
 		worldName,
 		guildMarkCustom,
 	} = characterInfo;
-
-	console.log(characterInfo);
 
 	return (
 		<StatBox>
