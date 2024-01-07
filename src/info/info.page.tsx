@@ -1,11 +1,10 @@
 import { useQuery } from "react-query";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getCharacterInfo } from "../common/apis/character.api";
 import { styled } from "styled-components";
 import { CharacterProfile } from "./components/character-profile.component";
 import { CharacterStat } from "./components/character-stat.component";
 import { CharacterSpec } from "./components/character-spec.component";
-import { iCharacterInfo } from "../main/components/character-card.component";
 
 const Title = styled.div`
 	color: white;
@@ -20,6 +19,7 @@ const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	padding: 15px 40px 15px 40px;
+	width: calc(100% - 80px);
 	color: #e9eaed;
 `;
 
@@ -30,22 +30,19 @@ const DetailInfoContainer = styled.div`
 `;
 
 export function InfoPage() {
-	const location = useLocation()
-		.pathname.split("/")
-		.filter((v) => v !== "/");
-
-	const characterName = decodeURIComponent(
-		location[location.indexOf("info") + 1]
-	);
+	const location = useLocation();
+	const navigate = useNavigate();
+	const params = new URLSearchParams(location.search);
+	const id = params.get("id") as string;
 
 	const { data: characterInfo, isFetched: isInfoFetched } = useQuery({
-		queryFn: () => getCharacterInfo(characterName),
+		queryFn: () => getCharacterInfo(id),
 		queryKey: ["getCharacterInfo"],
 		select: (res) => {
 			if (res.success) {
 				return res.data;
 			} else if (!res.success) {
-				console.log("캐릭터 정보 가져오기 실패");
+				console.log("캐릭터 정보 조회에 실패했습니다.");
 				return {};
 			}
 		},
@@ -54,11 +51,17 @@ export function InfoPage() {
 	return isInfoFetched ? (
 		<>
 			<Wrapper>
-				<Title>maple info</Title>
+				<Title
+					onClick={() => {
+						navigate("/");
+					}}>
+					maple info
+				</Title>
 				<CharacterProfile characterInfo={characterInfo}></CharacterProfile>
 				<DetailInfoContainer>
-					<CharacterStat></CharacterStat>
-					<CharacterSpec></CharacterSpec>
+					<CharacterStat characterInfo={characterInfo}></CharacterStat>
+					<CharacterSpec
+						characterName={characterInfo.characterName}></CharacterSpec>
 				</DetailInfoContainer>
 			</Wrapper>
 		</>

@@ -27,22 +27,19 @@ const Title = styled.div`
 export function MainPage() {
 	const form = useForm({
 		defaultValues: {
-			searchKeyword: "",
+			id: "",
 		},
 	});
 	const navigate = useNavigate();
 
 	const handleSubmit = () => {
-		navigate(`/info/${form.getValues().searchKeyword}`);
+		navigate(`/info?id=${form.getValues().id}`);
 	};
 
 	return (
 		<MainContainer onSubmit={handleSubmit}>
 			<Title>maple info</Title>
-			<SearchBar
-				form={form}
-				name="searchKeyword"
-				onSubmit={handleSubmit}></SearchBar>
+			<SearchBar form={form} onSubmit={handleSubmit} name="id"></SearchBar>
 			<Top3Character></Top3Character>
 			<ClassList></ClassList>
 		</MainContainer>

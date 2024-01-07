@@ -15,3 +15,10 @@ export async function getTop3CharacterInfo(): Promise<any> {
 		method: eApiMethod.GET,
 	});
 }
+
+export async function getEquipmentInfo(characterName: string): Promise<any> {
+	return await baseApi({
+		url: `http://localhost:8080/nexon/character/item-equipment?characterName=${characterName}`,
+		method: eApiMethod.GET,
+	});
+}

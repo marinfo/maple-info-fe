@@ -1,9 +1,5 @@
 import { styled } from "styled-components";
-import {
-	eCharacterClass,
-	eClassColor,
-} from "../../common/enums/character-class.enum";
-import { useTranslation } from "react-i18next";
+import { eClassColor } from "../../common/enums/character-class.enum";
 
 const ClassButton = styled.div`
 	display: flex;
@@ -33,19 +29,18 @@ const ClassLabel = styled.div`
 `;
 
 export function ClassCard(props: {
-	classCode: number;
+	className: string;
 	classColor: eClassColor;
 }) {
-	const { classCode, classColor } = props;
-	const { t } = useTranslation();
+	const { className, classColor } = props;
 
 	return (
 		<>
 			<ClassButton>
 				<img
 					alt=""
-					key={classCode}
-					src={`/images/characters/char${classCode}.png`}
+					key={className}
+					src={`/images/characters/${className}.png`}
 					style={{
 						width: "90px",
 						height: "90px",
@@ -54,7 +49,7 @@ export function ClassCard(props: {
 					style={{
 						backgroundColor: classColor,
 					}}>
-					{t(`CLASS_NAME.${eCharacterClass[classCode]}`)}
+					{className}
 				</ClassLabel>
 			</ClassButton>
 		</>

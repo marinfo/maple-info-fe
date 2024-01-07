@@ -20,6 +20,7 @@ export async function baseApi(apiConfig: iApiConfig) {
 			data: apiResult.data,
 		};
 	} catch (error) {
+		// TODO. 서버 측 에러 응답에 맞춰 사양 변경필요
 		return {
 			success: false,
 			message: (error as any)?.message ?? "에러가 발생했습니다.",

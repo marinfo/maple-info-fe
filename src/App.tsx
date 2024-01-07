@@ -12,7 +12,7 @@ function App() {
 			<QueryClientProvider client={queryClient}>
 				<BrowserRouter>
 					<Routes>
-						<Route path="/info/:id" element={<InfoPage />} />
+						<Route path="/info" element={<InfoPage />} />
 						<Route path="/" element={<MainPage />} />
 						<Route path="*" element={<MainPage />} />
 					</Routes>

@@ -2,6 +2,13 @@ import { styled } from "styled-components";
 import { BaseTab } from "../../common/components/tab.component";
 import { eClassColor } from "../../common/enums/character-class.enum";
 import { ClassCard } from "./class-card.component";
+import {
+	ARCHOR_CLASSES,
+	MAGICIAN_CLASSES,
+	PIRATE_CLASSES,
+	THIEF_CLASSES,
+	WARRIOR_CLASSES,
+} from "../../common/constants/class-map.constant";
 
 const Container = styled.div`
 	background-color: white;
@@ -22,48 +29,6 @@ const BoxLabel = styled.div`
 `;
 
 export function ClassList() {
-	const warriorClassCodeList = Array(12)
-		.fill(1)
-		.map((v, i) => {
-			return i + 1;
-		});
-
-	const magicianClassCodeList = Array(10)
-		.fill(1)
-		.map((v, i) => {
-			return i + 1 + warriorClassCodeList.length;
-		});
-
-	const archorClassCodeList = Array(7)
-		.fill(1)
-		.map((v, i) => {
-			return i + 1 + warriorClassCodeList.length + magicianClassCodeList.length;
-		});
-	const thiefClassCodeList = Array(9)
-		.fill(1)
-		.map((v, i) => {
-			return (
-				i +
-				1 +
-				warriorClassCodeList.length +
-				magicianClassCodeList.length +
-				archorClassCodeList.length
-			);
-		});
-
-	const pirateClassCodeList = Array(9)
-		.fill(1)
-		.map((v, i) => {
-			return (
-				i +
-				1 +
-				warriorClassCodeList.length +
-				magicianClassCodeList.length +
-				archorClassCodeList.length +
-				thiefClassCodeList.length
-			);
-		});
-
 	return (
 		<Container>
 			<BoxLabel>직업별 전투력 순위</BoxLabel>
@@ -77,11 +42,11 @@ export function ClassList() {
 									display: "flex",
 									flexWrap: "wrap",
 								}}>
-								{warriorClassCodeList.map((v, i) => {
+								{WARRIOR_CLASSES.map((className, i) => {
 									return (
 										<ClassCard
 											key={i}
-											classCode={v}
+											className={className}
 											classColor={eClassColor.WARRIOR}></ClassCard>
 									);
 								})}
@@ -96,11 +61,11 @@ export function ClassList() {
 									display: "flex",
 									flexWrap: "wrap",
 								}}>
-								{magicianClassCodeList.map((v, i) => {
+								{MAGICIAN_CLASSES.map((className, i) => {
 									return (
 										<ClassCard
 											key={i}
-											classCode={v}
+											className={className}
 											classColor={eClassColor.MAGICIAN}></ClassCard>
 									);
 								})}
@@ -115,11 +80,11 @@ export function ClassList() {
 									display: "flex",
 									flexWrap: "wrap",
 								}}>
-								{archorClassCodeList.map((v, i) => {
+								{ARCHOR_CLASSES.map((className, i) => {
 									return (
 										<ClassCard
 											key={i}
-											classCode={v}
+											className={className}
 											classColor={eClassColor.ARCHOR}></ClassCard>
 									);
 								})}
@@ -134,11 +99,11 @@ export function ClassList() {
 									display: "flex",
 									flexWrap: "wrap",
 								}}>
-								{thiefClassCodeList.map((v, i) => {
+								{THIEF_CLASSES.map((className, i) => {
 									return (
 										<ClassCard
 											key={i}
-											classCode={v}
+											className={className}
 											classColor={eClassColor.THIEF}></ClassCard>
 									);
 								})}
@@ -153,11 +118,11 @@ export function ClassList() {
 									display: "flex",
 									flexWrap: "wrap",
 								}}>
-								{pirateClassCodeList.map((v, i) => {
+								{PIRATE_CLASSES.map((className, i) => {
 									return (
 										<ClassCard
 											key={i}
-											classCode={v}
+											className={className}
 											classColor={eClassColor.PIRATE}></ClassCard>
 									);
 								})}
